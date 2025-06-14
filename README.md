@@ -21,8 +21,6 @@ This system offers an alternative to expensive LiDAR/radar setups by relying sol
 ---
 
 ## System Architecture
-
-```text
 [ Multi-Camera Input (Front, Left, Right) ]
             ↓
   [ Stereo Image Processing + Depth Estimation ]
@@ -34,6 +32,7 @@ This system offers an alternative to expensive LiDAR/radar setups by relying sol
 [ Rule-Based Controller ] ---> [ Motor Control / Stop Logic ]
             ↓
       [ Dashboard Visualizer ]
+
 Abstract
 This research investigates how low-cost, vision-only autonomous systems can achieve human-trustworthy spatial awareness using real-time multi-camera input and machine learning. The project aims to build a self-navigating, camera-powered model vehicle capable of detecting free space and obstacles using a simplified Bird's Eye View (BEV) occupancy map derived from stereo vision and a trained spatial segmentation model. This system addresses the growing demand for safer and more transparent camera-based navigation methods in customer-facing autonomous technologies.
 
