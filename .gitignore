@@ -1,4 +1,45 @@
-# Byte-compiled / optimized / DLL files
+# .gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+.ipynb_checkpoints/
+.DS_Store
+
+# Machine Learning & Data
+models/*.tflite # Trained TensorFlow Lite models
+models/*.pb    # TensorFlow GraphDef files
+data/          # Raw data, datasets (can be large)
+logs/          # Training logs, TensorBoard logs
+results/       # Inference results, evaluation outputs
+output.avi     # Generated video output from scripts
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Operating System Files
+.DS_Store
+.Trash-*
+ehthumbs.db
+Thumbs.db
+
+# Environment variables
+.env
+*.env
+
+# Large files often generated
+*.log
+*.sqlite3
+*.dbx# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
