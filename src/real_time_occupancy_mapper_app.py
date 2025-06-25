@@ -2,48 +2,35 @@
 
 import os
 import sys
-import time # Used for performance timing in the main loop
+import time
 
-# Placeholder imports for external libraries.
-# In a real implementation, these would be uncommented and installed.
 # import cv2
 # import numpy as np
 # import tensorflow as tf
 # from PIL import Image
 
 # ==============================================================================
-# NASA 10 Coding Principles Considerations for an Embedded System:
-# These principles are high-level design goals for critical embedded systems.
-# While Python's runtime characteristics (e.g., dynamic typing, garbage
-# collection) inherently differ from C/C++ often used in NASA contexts,
-# the spirit of these principles is applied through careful design and
-# commenting on how they would be addressed in a lower-level implementation.
-#
+# NASA 10 Coding Principles ( only focused on these core 5 )
 # 1. No dynamic memory allocation after initialization:
 #    - Design Goal: All major data structures and buffers should be
 #      pre-allocated or sized at system startup. Avoid runtime allocationsy
 #      within the main processing loop to ensure predictable performance.
 #    - Python Context: While Python's memory management is automatic,
-#      the *application design* will aim to reuse objects and buffers.
+#      the application design* will aim to reuse objects and buffers.
 # 2. No recursion:
 #    - All algorithms and control flows will be implemented iteratively.
 # 3. All loops must have a fixed upper bound:
 #    - Critical for real-time predictability. Loops will either iterate a fixed
 #      number of times or have clear, measurable termination conditions.
 # 4. No floating-point arithmetic if not explicitly justified:
-#    - Machine learning operations (inference) inherently involve floating-point
+#    - Machine learning operations inherently involve floating-point
 #      arithmetic. Precision will be carefully managed, potentially through
-#      quantization (e.g., TensorFlow Lite INT8 models) to optimize performance
-#      on embedded hardware.
+#      quantization to optimize performance
 # 5. All variables must be explicitly declared and initialized:
 #    - Python's dynamic typing means explicit type declarations are not
 #      mandatory, but variables will be initialized with meaningful default
 #      values or through function arguments to ensure clear state. Type hints
 #      are used to improve readability and maintainability.
-# 6. Compiler warnings must be eliminated:
-#    - Python Context: Equivalent to eliminating linting warnings (e.g., via
-#      tools like Pylint or Flake8) to ensure code quality and avoid potential
-#      runtime issues.
 # ==============================================================================
 
 class CameraManager:
