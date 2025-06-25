@@ -1,25 +1,86 @@
-# Real-Time Vision-Based Occupancy Mapping for Autonomous Navigation Using Low-Cost Multi-Camera Systems
+Real-Time Object Instance Segmentation with YOLOv8-seg
+Overview
+This project focuses on real-time object instance segmentation using the Ultralytics YOLOv8-seg model and OpenCV. It's designed to process video streams, identify distinct objects, segment them with unique colors, and visualize the results with bounding boxes and confidence scores. This system provides a robust solution for understanding complex scenes by isolating individual objects, making it valuable for applications requiring precise object localization and shape analysis.
 
----
+This iteration emphasizes the software and machine learning aspects of real-time vision processing, moving away from embedded systems and robotic control to concentrate on advanced computer vision capabilities.
 
-## Overview
+Abstract
+This research presents a system for real-time object instance segmentation leveraging the Ultralytics YOLOv8-seg model for robust and efficient visual scene understanding. The project aims to process video input, perform pixel-level segmentation of individual object instances, and display these results with high confidence and accuracy. This system addresses the need for detailed visual information in various applications, from surveillance to interactive media, by offering precise object boundary identification.
 
-This project explores how **low-cost, vision-only autonomous systems** can achieve **human-trustworthy spatial awareness** using real-time **multi-camera input** and machine learning. We aim to build a **self-navigating model vehicle** that uses camera data to generate **Bird's Eye View (BEV) occupancy maps**, enabling it to identify free space and obstacles for autonomous navigation.
+The methodology involves utilizing a pre-trained yolov8n-seg.pt model to analyze video frames. For each detected object, a unique colored segmentation mask is overlaid on the original frame, complemented by bounding boxes, class labels, and confidence scores. The system is configurable to accept different video input sources, demonstrating foundational Computer Vision (CV) and image and video understanding principles.
 
-This system offers an alternative to expensive LiDAR/radar setups by relying solely on camera input, making it suitable for scalable, cost-effective autonomous platforms.
+Preliminary tests demonstrate effective real-time processing and accurate segmentation of multiple object instances within dynamic video environments. The expected outcome is a functioning proof-of-concept for high-fidelity object segmentation that can be adapted for various vision-based analytical tasks.
 
----
+Features
+Real-time Segmentation: Processes video frames in real-time to perform object instance segmentation.
 
-# Abstract
-This research investigates how low-cost, vision-only autonomous systems can achieve human-trustworthy spatial awareness using real-time multi-camera input and machine learning. The project aims to build a self-navigating, camera-powered model vehicle capable of detecting free space and obstacles using a simplified Bird's Eye View (BEV) occupancy map derived from stereo vision and a trained spatial segmentation model. This system addresses the growing demand for safer and more transparent camera-based navigation methods in customer-facing autonomous technologies.
+YOLOv8n-seg Model: Utilizes the efficient yolov8n-seg.pt pre-trained model for fast and accurate segmentation.
 
-The methodology includes mounting three cameras (front, left, and right) on a mobile vehicle chassis, capturing labeled driving scene images across a controlled test course, and training a lightweight Convolutional Neural Network (CNN) to generate occupancy maps from those views. Depth will be approximated using stereo image pairs, and resulting BEV maps will be visualized as live-updating heatmaps on a local dashboard. A rule-based controller will interpret the BEV maps to initiate movement or stopping decisions in real time.
+Mask Visualization: Overlays colored segmentation masks on detected objects, making individual instances clear.
 
-Preliminary tests on simulated data demonstrate effective detection of occupied versus navigable zones. The expected outcome is a functioning proof-of-concept that links spatial vision modeling with real-world action. Future work will explore improved fusion methods and confidence-aware learning.
+Bounding Box and Labeling: Draws bounding boxes and displays class labels with confidence scores for each detected object.
 
+Configurable Input: Easily change the input video file.
 
+Setup and Usage
+To run this project, follow these steps:
+
+Clone the repository:
+
+git clone https://github.com/your-repo/real-time-object-segmentation.git
+cd real-time-object-segmentation
+
+Install dependencies:
+
+pip install opencv-python numpy ultralytics
+
+Download the YOLOv8n-seg model:
+The script will automatically download yolov8n-seg.pt if it's not present when YOLO('yolov8n-seg.pt') is called.
+
+Place your video file:
+Ensure your input video file (e.g., park.mp4) is in the root directory of the project, or update the APP_INPUT_VIDEO_PATH variable in src/real_time_object_segmentation_app.py to point to your video.
+
+Run the application:
+
+python src/real_time_object_segmentation_app.py
+
+Code Structure
 .
 ├── README.md
+├── src/
+│   └── real_time_object_segmentation_app.py
+└── yolov8n-seg.pt (This will be downloaded automatically)
+└── park.mp4 (Example input video)
+
+The core logic resides in src/real_time_object_segmentation_app.py, organized into modular classes:
+
+VideoProcessor: Handles video loading, YOLOv8-seg model inference, and applying segmentation overlays to frames.
+
+SegmentationVisualizer: Manages the OpenCV display window and renders the processed frames with performance metrics.
+
+ApplicationCoordinator: Orchestrates the overall application flow, coordinating between the VideoProcessor and SegmentationVisualizer.
+
+NASA 10 Coding Principles
+This project adheres to key principles for robust and predictable software design, particularly relevant for real-time systems:
+
+No dynamic memory allocation after initialization: Minimizes runtime overhead.
+
+No recursion: Ensures predictable stack usage.
+
+All loops must have a fixed upper bound: Guarantees real-time predictability for iteration-based processes.
+
+No floating-point arithmetic if not explicitly justified: Prioritizes performance while acknowledging necessary ML operations.
+
+All variables must be explicitly declared and initialized: Promotes clear state and prevents undefined behavior.
+
+Future Enhancements
+Performance Optimization: Explore quantization or model pruning for improved inference speed.
+
+Diverse Input Sources: Add support for live camera feeds or network streams.
+
+Custom Model Training: Provide instructions or a pipeline for training YOLOv8-seg on custom datasets.
+
+User Interface: Implement a more interactive GUI for controls and visualizations beyond basic OpenCV windows.
 ├── .gitignore
 ├── src/
 │   └── real_time_occupancy_mapper_app.py
